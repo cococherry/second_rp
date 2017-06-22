@@ -1,5 +1,7 @@
 package common;
 import java.sql.*;
+import java.util.*;
+import java.io.*;
 
 // Singleton 디자인 패턴
 // 프로그램이 실행되는 내내 해당 클래스에 대한 객체를 한 개만
@@ -10,16 +12,22 @@ public class JDBCTemplete {
 
 	public static Connection getConnection(){
 		Connection conn = null;
-		
+		Properties prop = new Properties();
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			prop.load(new BufferedReader(new FileReader("driver.properties")));
+			Class.forName(prop.getProperty("driver"));
 			conn = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:xe","student","student");
+					prop.getProperty("url"),prop.getProperty("user"),prop.getProperty("pwd"));
+			/*Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection(
+					"jdbc:oracle:thin:@localhost:1521:xe","student","student");*/
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -49,7 +57,6 @@ public class JDBCTemplete {
 			if(!rset.isClosed())
 				rset.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +66,6 @@ public class JDBCTemplete {
 			if(!con.isClosed())
 				con.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -69,7 +75,6 @@ public class JDBCTemplete {
 			if(!con.isClosed())
 				con.rollback();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
