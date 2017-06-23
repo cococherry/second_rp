@@ -50,6 +50,7 @@ public class ProductController {
 		Object[][] aRow = null;
 		if(pList != null){
 			aRow = new Object[pList.size()][4];
+			
 			for(int i = 0 ; i < aRow.length ; i++){
 				//System.out.println(pList.get(i));
 				aRow[i][0] = pList.get(i).getProductId();
@@ -57,6 +58,9 @@ public class ProductController {
 				aRow[i][2] = pList.get(i).getPrice();
 				aRow[i][3] = pList.get(i).getDescription();
 			}
+			
+			
+			
 			/*int i = 0;
 			for(Product p : pList){
 				int j = 0;

@@ -160,7 +160,7 @@ public class GUIView extends JFrame {
 		pDesTF.setBounds(107, 371, 194, 21);
 		panel2.add(pDesTF);
 
-		spinner = new JSpinner();
+		spinner = new JSpinner(new SpinnerNumberModel(0, 0, 999999999, 1000));
 		spinner.setBounds(180, 336, 121, 22);
 		panel2.add(spinner);
 
