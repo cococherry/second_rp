@@ -24,7 +24,7 @@ public class ProductController {
 	
 	public ArrayList<Product> selectAll(){
 		ArrayList<Product> pList = new ProductDAO2().selectAll();
-		if(pList == null) errors(-1,"데이터를 정상적으로 조회하지 못했습니다.");
+		if(pList.isEmpty()) errors(-1,"데이터를 정상적으로 조회하지 못했습니다.");
 		return pList;
 	}
 	
